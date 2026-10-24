@@ -218,3 +218,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# LIRA: local datasets and generated reports
+/data/
+/datasets/
+*.csv
+*.parquet
+.env.*
+!.env.example
+/reports/*
+!/reports/.gitkeep
