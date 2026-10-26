@@ -1,2 +1,2 @@
 # LIRA
-Learning Intrusion Reasoning Agent — Hybrid ML detects. LLM explains.
+Learning Intrusion Reasoning Agent — ML detects. LLM explains.
