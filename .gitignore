@@ -23,3 +23,5 @@ venv/
 .streamlit/cache/
 .ipynb_checkpoints/
 .DS_Store
+cloudflared.log
+uvicorn.log
