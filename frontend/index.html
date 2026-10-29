@@ -35,7 +35,7 @@
           <span class="upload-icon">↑</span>
           <strong id="file-label">Choose a CSV file</strong>
           <small>CSV format · Maximum 10 MB</small>
-          <input id="csv-file" type="file" accept=".csv,text/csv" required>
+          <input id="csv-file" type="file" required>
         </label>
 
         <label class="field-label" for="row-index">Row to analyze</label>
@@ -58,7 +58,7 @@
       </div>
       <pre id="detection"></pre>
       <h3>Investigation report</h3>
-      <pre id="report"></pre>
+      <div id="report" class="report-content"></div>
     </section>
 
     <p id="message" role="status" aria-live="polite"></p>
