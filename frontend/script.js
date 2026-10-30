@@ -6,6 +6,7 @@ const button = document.querySelector("#analyze-button");
 const message = document.querySelector("#message");
 const results = document.querySelector("#results");
 const reportPanel = document.querySelector("#report-panel");
+const mainContainer = document.querySelector(".container");
 
 // Escape HTML before inserting dynamic values into HTML.
 function escapeHTML(value) {
@@ -128,6 +129,7 @@ form.addEventListener("submit", async (event) => {
 
   results.hidden = true;
   if (reportPanel) reportPanel.hidden = true;
+  mainContainer.classList.remove("has-results");
 
   try {
     const response = await fetch(
@@ -224,6 +226,7 @@ form.addEventListener("submit", async (event) => {
 
     results.hidden = false;
     if (reportPanel) reportPanel.hidden = false;
+    mainContainer.classList.add("has-results");
 
     const investigationStatus = String(
       investigation.status || "UNKNOWN"
@@ -235,7 +238,7 @@ form.addEventListener("submit", async (event) => {
         : "Investigation finished. Review the findings before acting.";
 
     // Scroll only on mobile-sized screens.
-    if (window.innerWidth < 1000) {
+    if (window.innerWidth < 1100) {
       results.scrollIntoView({
         behavior: "smooth",
         block: "start"
