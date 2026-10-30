@@ -102,8 +102,50 @@ form.addEventListener("submit", async (event) => {
 
     document.querySelector("#result-summary").textContent =
       `Row ${payload.row_index} · Investigation ${payload.investigation_id}`;
-    document.querySelector("#detection").textContent =
-      JSON.stringify(payload.detection, null, 2);
+    const detection = payload.detection;
+
+if (!detection || typeof detection !== "object") {
+  throw new Error("The API returned invalid detection data.");
+}
+
+const probabilities = detection.probabilities || {};
+
+document.querySelector("#prediction").textContent =
+  detection.prediction || "UNKNOWN";
+
+const statusElement = document.querySelector("#detection-status");
+statusElement.textContent = detection.status || "UNKNOWN";
+statusElement.className =
+  "detection-status " + (detection.status || "unknown").toLowerCase();
+
+const confidence = Number(detection.confidence || 0);
+const confidencePercent = Math.max(0, Math.min(100, confidence * 100));
+
+document.querySelector("#confidence").textContent =
+  confidencePercent.toFixed(1) + "%";
+
+document.querySelector("#confidence-bar").style.width =
+  confidencePercent + "%";
+
+document.querySelector("#probabilities").innerHTML =
+  Object.entries(probabilities).map(([label, value]) => {
+    const percent = Math.max(0, Math.min(100, Number(value) * 100));
+
+    return `
+      <div class="probability-row">
+        <div class="metric-heading">
+          <span>${label}</span>
+          <strong>${percent.toFixed(1)}%</strong>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" style="width:${percent}%"></div>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+document.querySelector("#detection").textContent =
+  JSON.stringify(detection, null, 2);
     document.querySelector("#report").innerHTML =
       renderMarkdown(payload.report_markdown || "No report returned.");
     results.hidden = false;
