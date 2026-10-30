@@ -56,9 +56,38 @@
           <p id="result-summary">Analysis complete</p>
         </div>
       </div>
-      <pre id="detection"></pre>
-      <h3>Investigation report</h3>
-      <div id="report" class="report-content"></div>
+      <div class="detection-card">
+  <div class="detection-main">
+    <div>
+      <span class="result-label">PREDICTED CLASS</span>
+      <h3 id="prediction">—</h3>
+    </div>
+    <span id="detection-status" class="detection-status">—</span>
+  </div>
+
+  <div class="confidence-block">
+    <div class="metric-heading">
+      <span>Model confidence</span>
+      <strong id="confidence">—</strong>
+    </div>
+    <div class="progress-track">
+      <div id="confidence-bar" class="progress-fill"></div>
+    </div>
+  </div>
+
+  <div class="probability-section">
+    <h3>Class probabilities</h3>
+    <div id="probabilities"></div>
+  </div>
+</div>
+
+<h3>Investigation report</h3>
+<div id="report" class="report-content"></div>
+
+<details class="technical-details">
+  <summary>View raw detection data</summary>
+  <pre id="detection"></pre>
+</details>
     </section>
 
     <p id="message" role="status" aria-live="polite"></p>
