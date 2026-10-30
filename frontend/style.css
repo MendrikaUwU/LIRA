@@ -136,8 +136,14 @@ h1 span {
 }
 
 /* =========================================
-   TWO-COLUMN LAYOUT
+   RESPONSIVE LAYOUT — LIRA
 ========================================= */
+
+/* Default: one centered column */
+.container {
+  width: min(760px, calc(100% - 32px));
+  margin: auto;
+}
 
 .main-container {
   display: flex;
@@ -150,23 +156,23 @@ h1 span {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  width: 100%;
 }
 
-/* Desktop layout */
-
-@media (min-width: 1000px) {
-  .container {
+/* Desktop: two columns only after investigation */
+@media (min-width: 1100px) {
+  .container.has-results {
     width: min(1280px, calc(100% - 48px));
   }
 
-  .main-container {
+  .container.has-results .main-container {
     display: grid;
     grid-template-columns: 390px minmax(0, 1fr);
     gap: 28px;
     align-items: start;
   }
 
-  .left-col {
+  .container.has-results .left-col {
     position: sticky;
     top: 24px;
   }
@@ -635,18 +641,22 @@ footer span {
    TABLET AND MOBILE
 ========================================= */
 
-@media (max-width: 999px) {
-  .main-container {
+@media (max-width: 1099px) {
+  .container,
+  .container.has-results {
+    width: min(760px, calc(100% - 32px));
+  }
+
+  .main-container,
+  .container.has-results .main-container {
     display: flex;
     flex-direction: column;
+    gap: 0;
   }
 
   .left-col,
   .right-col {
     width: 100%;
-  }
-
-  .left-col {
     position: static;
   }
 }
