@@ -1,225 +1,82 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#090909">
-
-  <meta
-    name="description"
-    content="LIRA - Learning Intrusion Reasoning Agent. ML detects. LLM investigates, explains and guides."
-  >
-
+  <meta name="description" content="LIRA - Learning Intrusion Reasoning Agent. ML detects. LLM investigates, explains and guides.">
   <title>LIRA | Intrusion Reasoning Agent</title>
-
   <link rel="stylesheet" href="/frontend/style.css">
   <script src="/frontend/script.js" defer></script>
 </head>
-
 <body>
   <header class="topbar">
-    <a class="brand" href="/" aria-label="LIRA home">
-      L<span>I</span>RA<span class="dot">.</span>
-    </a>
-
-    <span class="status">
-      <i aria-hidden="true"></i>
-      LOCAL ANALYSIS API
-    </span>
+    <a class="brand" href="/" aria-label="LIRA home">L<span>I</span>RA<span class="dot">.</span></a>
+    <span class="status"><i aria-hidden="true"></i>LOCAL ANALYSIS API</span>
   </header>
-
   <main class="container">
-
-    <!-- INTRODUCTION -->
     <section class="hero">
-      <p class="eyebrow">
-        LEARNING INTRUSION REASONING AGENT
-      </p>
-
-      <h1>
-        See the threat.
-        <br>
-        <span>Understand the why.</span>
-      </h1>
-
-      <p class="subtitle">
-        ML detects. LLM investigates, explains and guides.
-      </p>
+      <p class="eyebrow">LEARNING INTRUSION REASONING AGENT</p>
+      <h1>See the threat.<br><span>Understand the why.</span></h1>
+      <p class="subtitle">ML detects. LLM investigates, explains and guides.</p>
     </section>
-
-    <!-- MAIN LAYOUT -->
     <div class="main-container">
-
-      <!-- LEFT COLUMN -->
       <div class="left-col">
-
-        <!-- 01: CSV ANALYSIS -->
         <section class="panel">
           <div class="section-heading">
             <span class="number">01</span>
-
-            <div>
-              <h2>Analyze network traffic</h2>
-              <p>
-                Upload a CIC-IDS2017-style CSV file to begin.
-              </p>
-            </div>
+            <div><h2>Analyze network traffic</h2><p>Upload a CIC-IDS2017-style CSV file to begin.</p></div>
           </div>
-
           <form id="analysis-form">
-
             <label class="upload" for="csv-file">
               <span class="upload-icon" aria-hidden="true">↑</span>
-
-              <strong id="file-label">
-                Choose a CSV file
-              </strong>
-
-              <small>
-                CSV format · Maximum 10 MB
-              </small>
-
-              <input
-                id="csv-file"
-                type="file"
-                required
-              >
+              <strong id="file-label">Choose a CSV file</strong>
+              <small>CSV format · Maximum 10 MB</small>
+              <input id="csv-file" type="file" required>
             </label>
-
-            <label class="field-label" for="row-index">
-              Row to analyze
-            </label>
-
-            <input
-              id="row-index"
-              type="number"
-              min="0"
-              step="1"
-              value="0"
-              required
-            >
-
-            <button id="analyze-button" type="submit">
-              <span>Run investigation</span>
-              <span aria-hidden="true">↗</span>
-            </button>
-
-            <p class="notice">
-              Analysis results are estimates, not proof of a real incident.
-              Review findings before taking defensive action.
-            </p>
-
+            <label class="field-label" for="row-index">Row to analyze</label>
+            <input id="row-index" type="number" min="0" step="1" value="0" required>
+            <button id="analyze-button" type="submit"><span>Run investigation</span><span aria-hidden="true">↗</span></button>
+            <p class="notice">Analysis results are estimates, not proof of a real incident. Review findings before taking defensive action.</p>
           </form>
         </section>
-
-        <!-- 02: DETECTION RESULTS -->
         <section id="results" class="panel results" hidden>
-
           <div class="section-heading">
             <span class="number">02</span>
-
-            <div>
-              <h2>Investigation results</h2>
-              <p id="result-summary">
-                Analysis complete
-              </p>
-            </div>
+            <div><h2>Investigation results</h2><p id="result-summary">Analysis complete</p></div>
           </div>
-
           <div class="detection-card">
-
             <div class="detection-main">
-              <div>
-                <span class="result-label">
-                  PREDICTED CLASS
-                </span>
-
-                <h3 id="prediction">—</h3>
-              </div>
-
-              <span
-                id="detection-status"
-                class="detection-status"
-              >
-                —
-              </span>
+              <div><span class="result-label">PREDICTED CLASS</span><h3 id="prediction">—</h3></div>
+              <span id="detection-status" class="detection-status">—</span>
             </div>
-
             <div class="confidence-block">
-              <div class="metric-heading">
-                <span>Model confidence</span>
-                <strong id="confidence">—</strong>
-              </div>
-
-              <div class="progress-track">
-                <div
-                  id="confidence-bar"
-                  class="progress-fill"
-                ></div>
-              </div>
+              <div class="metric-heading"><span>Model confidence</span><strong id="confidence">—</strong></div>
+              <div class="progress-track"><div id="confidence-bar" class="progress-fill"></div></div>
             </div>
-
-            <div class="probability-section">
-              <h3>Class probabilities</h3>
-              <div id="probabilities"></div>
-            </div>
-
+            <div class="probability-section"><h3>Class probabilities</h3><div id="probabilities"></div></div>
           </div>
         </section>
-
       </div>
-
-      <!-- RIGHT COLUMN -->
       <div class="right-col">
-
-        <!-- 03: INVESTIGATION REPORT -->
-        <section
-          id="report-panel"
-          class="panel report-panel"
-          hidden
-        >
+        <section id="report-panel" class="panel report-panel" hidden>
           <div class="section-heading">
             <span class="number">03</span>
-
-            <div>
-              <h2>Investigation report</h2>
-              <p>
-                Findings, evidence and recommendations
-              </p>
-            </div>
+            <div><h2>Investigation report</h2><p>Findings, evidence and recommendations</p></div>
           </div>
-
-          <div
-            id="report"
-            class="report-content"
-            aria-live="polite"
-          ></div>
-
+          <div id="report" class="report-content" aria-live="polite"></div>
+          <button id="download-pdf-button" type="button" hidden>
+            <span>Download PDF</span><span aria-hidden="true">↓</span>
+          </button>
           <details class="technical-details">
             <summary>View raw detection data</summary>
             <pre id="detection"></pre>
           </details>
-
         </section>
-
       </div>
-
     </div>
-
-    <!-- STATUS MESSAGE -->
-    <p
-      id="message"
-      role="status"
-      aria-live="polite"
-    ></p>
-
-    <footer>
-      LIRA
-      <span>•</span>
-      Responsible AI-assisted security analysis
-    </footer>
-
+    <p id="message" role="status" aria-live="polite"></p>
+    <footer>LIRA <span>•</span> Responsible AI-assisted security analysis</footer>
   </main>
 </body>
 </html>
