@@ -2,44 +2,99 @@
 
 **ML detects. LLM investigates, explains and guides.**
 
-LIRA is a prototype for investigating a selected network-flow record from a CSV. A Random Forest provides the initial class prediction; Muse Spark Open (through Baseten) selects among bounded, Python-validated analysis tools and helps produce a Markdown report.
+LIRA is a prototype for investigating selected network-flow records from a CSV file. A Random Forest model provides the initial class prediction, while Muse Spark Open, accessed through Baseten, guides a bounded investigation by selecting among Python-validated analysis tools. LIRA then produces an accessible Markdown report with findings, uncertainties and defensive recommendations.
 
-> This is a research/demo tool, not a real-time monitor or automatic blocking system. A model prediction is not proof of a real-world attack.
+> LIRA is a research and demonstration tool. It is not a real-time network monitoring or automatic traffic-blocking system. A model prediction is not proof of a real-world attack.
 
-## Project files
+## Project structure
 
-- `app.py` — Streamlit interface for CSV upload, row selection, detection, investigation and report download.
-- `lira_engine.py` — detection, investigation state, authorized tools, Muse Spark call and Markdown report.
+- `api.py` — FastAPI backend, API endpoints, investigation handling and PDF report generation.
+- `lira_engine.py` — Random Forest detection, investigation state, authorized analysis tools, Muse Spark integration and Markdown report generation.
+- `frontend/` — HTML, CSS and JavaScript interface.
 - `requirements.txt` — Python dependencies.
-- `.env.example` — names of configuration variables only; no real credentials.
+- `.env.example` — example configuration variable names; contains no real credentials.
 
-## Required runtime configuration
+## Runtime configuration
 
-The trained model file is intentionally **not included** in this repository. Place `lira_rf_baseline.joblib` in a local `models/` directory or set `LIRA_MODEL_PATH` to its actual location. The artifact must contain `model` and `features` keys, as in the existing Colab notebook.
+The trained model is intentionally not included in this repository.
 
-Set `BASETEN_API_KEY` as an environment variable or deployment secret. Never put the real key in source code, README, notebook outputs, screenshots, or GitHub commits.
+Place `lira_rf_baseline.joblib` in the local `models/` directory, or set `LIRA_MODEL_PATH` to the actual model file location. The artifact must contain the `model` and `features` keys used by the project.
 
-Optional: set `LIRA_REFERENCE_CSV` to a compatible CSV containing all model features and a `Label` (or `label`/`class`) column. This enables `compare_similar_flows`; without it, that tool is not offered to Muse Spark.
+Set `BASETEN_API_KEY` as an environment variable or deployment secret. Never include the real API key in source code, notebooks, screenshots, README files or GitHub commits.
+
+Optional: set `LIRA_REFERENCE_CSV` to a compatible reference dataset containing the required model features and a `Label` (or `label`/`class`) column. This enables the `compare_similar_flows` analysis tool. Without a compatible reference dataset, that analysis is unavailable.
 
 ## Run locally
 
+Create and activate a virtual environment:
+
 ```bash
 python -m venv .venv
-# Windows: .venv\\Scripts\\activate
-# Linux/macOS: source .venv/bin/activate
-pip install -r requirements.txt
-# Set BASETEN_API_KEY and LIRA_MODEL_PATH in your environment.
-streamlit run app.py
+
+# Windows
+.venv\Scripts\activate
+
+# Linux/macOS
+source .venv/bin/activate
 ```
 
-## Deployment note
+Install the dependencies:
 
-GitHub stores the source; it does not run the app by itself. A Streamlit-compatible host or another Python hosting service is needed to run `app.py`. Configure `BASETEN_API_KEY` and the model artifact securely in the hosting environment. Do not commit the complete CIC-IDS2017 dataset or the trained model to the source repository.
+```bash
+pip install -r requirements.txt
+```
+
+Configure the required environment variables:
+
+```bash
+# Linux/macOS
+export BASETEN_API_KEY="your_api_key"
+export LIRA_MODEL_PATH="models/lira_rf_baseline.joblib"
+
+# Windows PowerShell
+$env:BASETEN_API_KEY="your_api_key"
+$env:LIRA_MODEL_PATH="models/lira_rf_baseline.joblib"
+```
+
+Start the FastAPI server from the project root:
+
+```bash
+uvicorn api:app --host 0.0.0.0 --port 8000
+```
+
+The API documentation is available at:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+The frontend is served by the application when configured through the backend.
+
+## Deployment
+
+GitHub stores the project source code but does not run the application by itself. Deployment requires a Python hosting service that supports FastAPI and an ASGI server such as Uvicorn.
+
+The deployment environment must provide:
+
+- The project source code.
+- The trained model artifact, stored separately from the source repository.
+- The `BASETEN_API_KEY` secret.
+- Any optional reference dataset required for similar-flow analysis.
+
+The application must be configured to use the correct model path and hosting port. Never commit the complete CIC-IDS2017 dataset, trained model artifacts or API credentials to the source repository.
 
 ## Current scope and limitations
 
-- CSV upload and one-row-at-a-time analysis.
+- CSV-based analysis of a selected network-flow record.
+- Random Forest initial classification using 78 numerical features.
+- LLM-guided investigation using registered Python analysis tools.
 - Maximum of three additional analysis actions per investigation.
-- Python validates the LLM's decision and executes only registered tools.
-- Similar-flow comparison requires a separately configured reference CSV.
-- Results are dataset-based and require human review; model probabilities may not be calibrated.
+- Python-side validation of proposed LLM decisions and authorized tool execution.
+- Markdown investigation report and PDF export.
+- Similar-flow comparison requires a separately configured reference dataset.
+- Model probabilities may not be calibrated and should not be interpreted as absolute certainty.
+- Findings are based on the supplied dataset and require human review.
+
+## Project status
+
+LIRA is an evolving prototype. Its detection, investigation workflow, API and report-generation components have been developed and tested. Further evaluation is needed to assess its behavior on additional data and its usefulness in practical cybersecurity investigations.
