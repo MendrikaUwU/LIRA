@@ -99,13 +99,13 @@ The application must be configured to use the correct model path and hosting por
 
 **Live Demo:** [Launch LIRA](https://lira-gre5.onrender.com/)
 
-**Sample Dataset:** [Download lira_test.csv](./lira_test.csv)
+**Sample Dataset:** [Download lira_test.csv](./lira_test(1).csv)
 
 ### How to use
 
 1. Download the sample CSV file.
 2. Open the LIRA live demo.
-3. Upload `lira_test.csv`.
+3. Upload `lira_test(1).csv`.
 4. Start the investigation.
 5. Review the detection results and investigation evidence.
 6. Download the generated PDF report.
