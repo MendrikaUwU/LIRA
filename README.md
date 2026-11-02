@@ -99,7 +99,7 @@ The application must be configured to use the correct model path and hosting por
 
 **Live Demo:** [Launch LIRA](https://lira-gre5.onrender.com/)
 
-**Sample Dataset:** [Download lira_test.csv](./lira_test(1).csv)
+**Sample Dataset:** [Download lira_test(1).csv](./lira_test(1).csv)
 
 ### How to use
 
