@@ -8,6 +8,7 @@
 data/
 models/
 *.csv
+!lira_test(1).csv
 *.joblib
 *.pkl
 *.pickle
