@@ -95,6 +95,25 @@ The application must be configured to use the correct model path and hosting por
 - Model probabilities may not be calibrated and should not be interpreted as absolute certainty.
 - Findings are based on the supplied dataset and require human review.
 
+## Try LIRA
+
+**Live Demo:** [Launch LIRA](https://lira-gre5.onrender.com/)
+
+**Sample Dataset:** [Download lira_test.csv](./lira_test.csv)
+
+### How to use
+
+1. Download the sample CSV file.
+2. Open the LIRA live demo.
+3. Upload `lira_test.csv`.
+4. Start the investigation.
+5. Review the detection results and investigation evidence.
+6. Download the generated PDF report.
+
+### Important Note
+
+LIRA is a prototype designed for network traffic analysis and investigation assistance. Its predictions are not definitive proof of malicious activity. The generated recommendations should be reviewed by a human operator.
+
 ## Project status
 
 LIRA is an evolving prototype. Its detection, investigation workflow, API and report-generation components have been developed and tested. Further evaluation is needed to assess its behavior on additional data and its usefulness in practical cybersecurity investigations.
