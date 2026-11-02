@@ -333,6 +333,22 @@ button:disabled {
   cursor: wait;
 }
 
+/* Compact PDF download button */
+
+.report-content button {
+  width: fit-content;
+  min-width: 150px;
+  margin-top: 18px;
+  padding: 11px 18px;
+
+  display: inline-flex;
+  justify-content: center;
+  gap: 12px;
+
+  border-radius: 8px;
+  font-size: 13px;
+}
+
 .notice {
   margin-bottom: 0;
 
