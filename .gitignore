@@ -8,7 +8,7 @@
 data/
 models/
 *.csv
-!lira_test(1).csv
+!lira_test.csv
 *.joblib
 *.pkl
 *.pickle
