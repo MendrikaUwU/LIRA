@@ -16,11 +16,11 @@ Watch the LIRA demonstration:
 
 ## Project Structure
 
-- `api.py` - FastAPI backend, API endpoints, investigation handling and PDF report generation.
-- `lira_engine.py` - Random Forest detection, investigation state, authorized analysis tools, Muse Spark integration and Markdown report generation.
-- `frontend/` - HTML, CSS and JavaScript interface.
-- `requirements.txt` - Python dependencies.
-- `.env.example` - Example configuration variable names. Contains no real credentials.
+- `api.py` : FastAPI backend, API endpoints, investigation handling and PDF report generation.
+- `lira_engine.py` : Random Forest detection, investigation state, authorized analysis tools, Muse Spark integration and Markdown report generation.
+- `frontend/` : HTML, CSS and JavaScript interface.
+- `requirements.txt` : Python dependencies.
+- `.env.example` : Example configuration variable names. Contains no real credentials.
 
 ## Runtime Configuration
 
