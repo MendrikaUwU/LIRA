@@ -21,7 +21,7 @@ Watch the LIRA demonstration:
 - `frontend/` : HTML, CSS and JavaScript interface.
 - `requirements.txt` : Python dependencies.
 - `.env.example` : Example configuration variable names. Contains no real credentials.
-- `docs/` : include an example of LIRA's investigation report in PDF format
+- `docs/` : Examples of LIRA's investigation report in PDF format
 
 ## Runtime Configuration
 
