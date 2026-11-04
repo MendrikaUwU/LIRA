@@ -22,7 +22,7 @@ Watch the LIRA demonstration:
 - `requirements.txt` : Python dependencies.
 - `.env.example` : Example configuration variable names. Contains no real credentials.
 - `docs/` : Examples of LIRA's investigation report in PDF format
-- `lira_test.csv` : Example of traffic in csv format
+- `lira_test.csv` : PortScan example in csv format
 
 ## Runtime Configuration
 
