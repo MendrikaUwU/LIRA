@@ -1,20 +1,28 @@
-# LIRA — Learning Intrusion Reasoning Agent
+# LIRA - Learning Intrusion Reasoning Agent
 
 **ML detects. LLM investigates, explains and guides.**
 
-LIRA is a prototype for investigating selected network-flow records from a CSV file. A Random Forest model provides the initial class prediction, while Muse Spark Open, accessed through Baseten, guides a bounded investigation by selecting among Python-validated analysis tools. LIRA then produces an accessible Markdown report with findings, uncertainties and defensive recommendations.
+LIRA is a prototype for investigating selected network-flow records from CSV files. A Random Forest model provides the initial class prediction, while Meta Muse Spark Open, accessed through Baseten, guides a bounded investigation by selecting from a set of Python-validated analysis tools.
+
+LIRA then generates an accessible Markdown report containing findings, uncertainties and defensive recommendations. Reports can also be exported as PDF files.
 
 > LIRA is a research and demonstration tool. It is not a real-time network monitoring or automatic traffic-blocking system. A model prediction is not proof of a real-world attack.
 
-## Project structure
+## Project Demo
 
-- `api.py` — FastAPI backend, API endpoints, investigation handling and PDF report generation.
-- `lira_engine.py` — Random Forest detection, investigation state, authorized analysis tools, Muse Spark integration and Markdown report generation.
-- `frontend/` — HTML, CSS and JavaScript interface.
-- `requirements.txt` — Python dependencies.
-- `.env.example` — example configuration variable names; contains no real credentials.
+Watch the LIRA demonstration:
 
-## Runtime configuration
+[Watch the video on YouTube](https://youtu.be/n-rzrfVPWAs)
+
+## Project Structure
+
+- `api.py` - FastAPI backend, API endpoints, investigation handling and PDF report generation.
+- `lira_engine.py` - Random Forest detection, investigation state, authorized analysis tools, Muse Spark integration and Markdown report generation.
+- `frontend/` - HTML, CSS and JavaScript interface.
+- `requirements.txt` - Python dependencies.
+- `.env.example` - Example configuration variable names. Contains no real credentials.
+
+## Runtime Configuration
 
 The trained model is intentionally not included in this repository.
 
@@ -24,7 +32,7 @@ Set `BASETEN_API_KEY` as an environment variable or deployment secret. Never inc
 
 Optional: set `LIRA_REFERENCE_CSV` to a compatible reference dataset containing the required model features and a `Label` (or `label`/`class`) column. This enables the `compare_similar_flows` analysis tool. Without a compatible reference dataset, that analysis is unavailable.
 
-## Run locally
+## Run Locally
 
 Create and activate a virtual environment:
 
@@ -64,9 +72,7 @@ uvicorn api:app --host 0.0.0.0 --port 8000
 
 The API documentation is available at:
 
-```text
-http://127.0.0.1:8000/docs
-```
+[http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 
 The frontend is served by the application when configured through the backend.
 
@@ -83,7 +89,7 @@ The deployment environment must provide:
 
 The application must be configured to use the correct model path and hosting port. Never commit the complete CIC-IDS2017 dataset, trained model artifacts or API credentials to the source repository.
 
-## Current scope and limitations
+## Current Scope and Limitations
 
 - CSV-based analysis of a selected network-flow record.
 - Random Forest initial classification using 78 numerical features.
@@ -101,7 +107,7 @@ The application must be configured to use the correct model path and hosting por
 
 **Sample Dataset:** [Download lira_test.csv](./lira_test.csv)
 
-### How to use
+### How to Use
 
 1. Download the sample CSV file.
 2. Open the LIRA live demo.
@@ -114,6 +120,6 @@ The application must be configured to use the correct model path and hosting por
 
 LIRA is a prototype designed for network traffic analysis and investigation assistance. Its predictions are not definitive proof of malicious activity. The generated recommendations should be reviewed by a human operator.
 
-## Project status
+## Project Status
 
 LIRA is an evolving prototype. Its detection, investigation workflow, API and report-generation components have been developed and tested. Further evaluation is needed to assess its behavior on additional data and its usefulness in practical cybersecurity investigations.
