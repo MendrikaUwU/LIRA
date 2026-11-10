@@ -105,7 +105,7 @@ The application must be configured to use the correct model path and hosting por
 
 ## Try LIRA
 
-**Live Demo:** [Launch LIRA](https://lira-gre5.onrender.com/)
+**Live Demo:** [Launch LIRA]
 
 **Sample Dataset:** [Download lira_test.csv](./lira_test.csv)
 
